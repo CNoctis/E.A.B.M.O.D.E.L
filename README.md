@@ -1,4 +1,3 @@
-# E.A.B.M.O.D.E.L
 ## E.A.B.M.O.D.E.L - Equipo alfa buena maravilla onda dinamita escuadrón lobo
 ¡Bienvenidos al perfil de nuestro equipo! Somos un grupo de desarrolladores de la UTN San Rafael comprometidos con la creación de soluciones tecnológicas innovadoras y eficientes.
 
