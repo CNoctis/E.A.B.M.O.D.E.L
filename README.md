@@ -10,3 +10,22 @@ Nuestro objetivo es crear proyectos de alta calidad que impacten positivamente e
 En este perfil podrás encontrar algunos de nuestros proyectos destacados, así como información sobre cada uno de nuestros miembros. Si estás interesado en colaborar con nosotros, no dudes en ponerte en contacto.
 
 ¡Gracias por visitarnos! 🙌💻👨‍💻👩‍💻🚀
+
+INTEGRANTES:
+♦ Gabriel Hernán Osores
+
+♦ Gonzalo Enzo Gramajo
+
+♦ Cristian Jose Rosas Guiana.
+
+♦ Augusto Damián Monza.
+
+♦ Agustin Nahuel Saravia.
+
+♦ María del Rosario Campora.
+
+♦ Leandro Ariel Saint Bonnet.
+
+♦ Emanuel Gaudino
+
+♦ Erwin Leandro Marte.
