@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons+Outlined">
+
+    <link rel="stylesheet" href="../static/css/main.css">
+    <link rel="stylesheet" href="../static/css/menu.css">
+    <link rel="stylesheet" href="../static/css/home/home.css">
+    <link rel="stylesheet" href="../static/css/home/canvas.css">
+
+    <script src="https://kit.fontawesome.com/d54fb62c44.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
+
+    <title>LIFE</title>
+</head>
+<body>
+    <header>
+        <article>
+            <a class="logo" href="#"><img src="../static/img/life_logo.png" alt="Logo"></a>
+        </article>
+        <button id="menu-icon-mobile">
+            <i class="fas fa-bars" id="menu-mobile-icon-open"></i>
+            <i class="fas fa-times" id="menu-mobile-icon-close"></i>
+        </button>
+        <nav>
+            <ul id="menu-first">
+                <li class="menu-first-item-class active">
+                    <a href="#">Inicio</a>
+                </li>
+                <li class="menu-first-item-class">
+                    <a href="/logout">Cerrar Sesion</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="menu-container">
+        <nav class="vertical-menu">
+            <ul>
+                <li class="menu-item">
+                    <a href="#" id="formularios">IMC</a>
+                </li>
+                <li class="menu-item">
+                    <a href="#" id="calorias_quemadas">Calorias Quemadas</a>
+                </li>
+                <li class="menu-item">
+                    <a href="#" id="calorias_consumidas">Peso Ideal</a>
+                </li>
+                <li class="menu-item">
+                    <a href="#" id="graficos">Graficos</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <main class="container">
+
+        <section class="first_section">
+            <div>
+                <article>
+                    <h1> Hi <span class="nameUser"> {{nombre}}</span>, ¡Bienvenido a Life!</h1>
+                </article>
+                <article class="first_section_two">
+                    <h6>
+                        Nuestra página cuenta con una calculadora de peso y grasa corporal que te permitirá llevar un control de las calorías que consumes y quemas. Podrás registrar y monitorear tu balance calórico diario, así como obtener información sobre tu composición corporal. ¡Comienza a tomar el control de tu bienestar ahora mismo!
+                    </h6>
+                </article>
+            </div>
+        </section>
+
+        <!--IMC-->
+        <section class="three_section">
+
+            <div id="form-imc">
+                <form method="POST" action="/imc">
+                    <div class="container-form">
+                        <article class="article-form-cal" id="first_form">
+                            <h1>Calcular <span>IMC</span></h1>
+                            <p>Para un cálculo correcto necesitamos algo de información básica sobre ti</p>
+                        </article>
+
+                        <div class="form-group">
+
+                            <article class="form-option-gender">
+                                <label>¿Cuál es tu sexo?</label>
+                                <div class="mt-16">
+                                    <div class="icn-btn-wrapper" id="gender-icn-btn-wrapper">
+                                        <input type="radio" id="male1" name="gender" value="male">
+                                        <label for="male1" class="img-btn-container">
+                                            <img class="icon-svg" src="../static/img/form/hombre.png" alt="Hombre" type="image/svg+xml">
+                                            Hombre
+                                        </label>
+                                        <input type="radio" id="female1" name="gender" value="female">
+                                        <label for="female1" class="img-btn-container">
+                                            <img class="icon-svg" src="../static/img/form/mujer.png" alt="Mujer" type="image/svg+xml">
+                                            Mujer
+                                        </label>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <article class="form-option-date">
+                                <label>Fecha de nacimiento</label>
+                                <article>
+                                    <input name="edad" type="date">
+                                </article>
+                            </article>
+                        </div>
+                    
+                    <div class="form-group">
+                        <article class="form-option-number">
+                            <label>¿Cuánto mides?</label>
+                            <article>
+                                <input name="altura" type="number" placeholder="180">
+                            </article>
+                        </article>
+
+                        <article class="form-option-number">
+                            <label>¿Cuánto pesas?</label>
+                            <article>
+                                <input name="peso" type="number" placeholder="60">
+                            </article>
+                        </article>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <select name="diasemana">
+                            <option value="0">Domingo</option>
+                            <option value="1">Lunes</option>
+                            <option value="2">Martes</option>
+                            <option value="3">Miércoles</option>
+                            <option value="4">Jueves</option>
+                            <option value="5">Viernes</option>
+                            <option value="6">Sábado</option>
+                        </select>
+                    </div>
+
+                    <button type="submit">
+                        <div class="button-style-3">
+                            <div class="button-name">
+                                Enviar
+                            </div>
+                            <div class="button-icon">
+                                >>
+                            </div>
+                        </div>
+                    </button>
+                    <div  class="condicional-if">
+                    {%if imc%}
+                    <div>
+                        <h1>Tu imc: <span>{{imc}}</span></h1>
+                    </div>
+                    {%endif%}
+                    {% if error_imc %}
+                    <div class="alert alert-error">
+                        <div class="icon__wrapper">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-triangle" viewBox="0 0 16 16">
+                                <path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/>
+                                <path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z"/>
+                            </svg>
+                        </div>
+                        <p>Tus datos ingresados son incorectos</p>
+                    </div>
+                    {% endif %}
+                    </div>
+
+                </form>
+            </div>
+
+        </section>
+
+        <section class="three_section" id="form-peso_ideal">
+
+            <div>
+                <form method="POST" action="/calorias_quemadas">
+                    <div class="container-form">
+                        <article class="article-form-cal" id="first_form">
+                            <h1>Calcular <span>las Calorias Quemadas al Día</span></h1>
+                            <p>Para un cálculo correcto necesitamos algo de información básica sobre ti</p>
+                        </article>
+                    
+                        <div class="form-group">
+                            <article class="form-option-gender">
+                                <label>¿Cuál es tu sexo?</label>
+                                <div class="mt-16">
+                                    <div class="icn-btn-wrapper" id="gender-icn-btn-wrapper">
+                                        <input type="radio" id="male2" name="gender" value="male">
+                                        <label for="male2" class="img-btn-container">
+                                            <img class="icon-svg" src="../static/img/form/hombre.png" alt="Hombre" type="image/svg+xml">
+                                            Hombre
+                                        </label>
+                                        <input type="radio" id="female2" name="gender" value="female">
+                                        <label for="female2" class="img-btn-container">
+                                            <img class="icon-svg" src="../static/img/form/mujer.png" alt="Mujer" type="image/svg+xml">
+                                            Mujer
+                                        </label>
+                                    </div>
+                                </div>
+                            </article>
+
+                        
+                            <article class="form-option-number">
+                                <label>Fecha de nacimiento</label>
+                                <article>
+                                    <input name="edad" type="date" placeholder="0">
+                                </article>
+                            </article>
+                        </div>
+                    
+                    <div class="form-group">
+                        <article class="form-option-number">
+                            <label>¿Cual es tu altura?</label>
+                            <article>
+                                <input name="altura" type="number" placeholder="180">
+                            </article>
+                        </article>
+                    
+                        <article class="form-option-number">
+                            <label>¿Cual es tu peso?</label>
+                            <article>
+                                <input name="peso" type="number" placeholder="60">
+                            </article>
+                        </article>
+
+                        </div>
+
+                        <div class="form-group">
+                            <article class="form-activity">
+                                <label>¿Que tan activo eres diariamente?</label>
+                                <br>
+                                <br>
+                                <article>
+                                    <input name="actividad" type="range" min="0" max="100" step="10" list="tickmarks">
+                                </article>
+                                <br>
+                                <div class="indicators">
+                                    <label>0 - No realiza ejercicio</label>
+                                    <label>50 - Actividad física media</label>
+                                    <label>100 - Realiza actividad física a diario</label>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="form-group">
+                            <select name="diasemana">
+                                <option value="0">Domingo</option>
+                                <option value="1">Lunes</option>
+                                <option value="2">Martes</option>
+                                <option value="3">Miércoles</option>
+                                <option value="4">Jueves</option>
+                                <option value="5">Viernes</option>
+                                <option value="6">Sábado</option>
+                            </select>
+                        </div>
+
+                    <button type="submit">
+                        <div class="button-style-3">
+                            <div class="button-name">
+                                Enviar
+                            </div>
+                            <div class="button-icon">
+                                >>
+                            </div>
+                        </div>
+                    </button>
+                    
+                    <div class="condicional-if">
+                    {%if calorias_quemadas%}
+                    <div>
+                        <h1>Tus calorias quemadas son: <span>{{calorias_quemadas}}</span></h1>
+                    </div>
+                    {%endif%}
+                    {% if error_calorias_quemadas %}
+                    <div class="alert alert-error">
+                        <div class="icon__wrapper">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-triangle" viewBox="0 0 16 16">
+                                <path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/>
+                                <path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z"/>
+                            </svg>
+                        </div>
+                        <p>Tus datos ingresados son incorectos</p>
+                    </div>
+                    {% endif %}
+                </div>
+
+                </form>
+            </div>
+        
+        </section>
+
+        <section class="fourth_section" id="form-fourth_form">
+
+            <div>
+                <form method="POST" action="/peso_ideal">
+                    <div class="container-form">
+                        <article class="article-form-cal" id="fourth_form">
+                            <h1>Calcular <span>Peso ideal</span></h1>
+                            <p>Para un cálculo correcto necesitamos algo de información básica sobre ti</p>
+                        </article>
+                    
+                        <div class="form-group">
+                            
+                                <article class="form-option-gender">
+                                    <label>¿Cuál es tu sexo?</label>
+                                    <div class="mt-16">
+                                        <div class="icn-btn-wrapper" id="gender-icn-btn-wrapper">
+                                            <input type="radio" id="male3" name="gender" value="male">
+                                            <label for="male3" class="img-btn-container">
+                                                <img class="icon-svg" src="../static/img/form/hombre.png" alt="Hombre" type="image/svg+xml">
+                                                Hombre
+                                            </label>
+                                            <input type="radio" id="female3" name="gender" value="female">
+                                            <label for="female3" class="img-btn-container">
+                                                <img class="icon-svg" src="../static/img/form/mujer.png" alt="Mujer" type="image/svg+xml">
+                                                Mujer
+                                            </label>
+                                        </div>
+                                    </div>
+                                </article>
+                        
+                            <article class="form-option-number">
+                                <label>Fecha de nacimiento</label>
+                                <article>
+                                    <input name="edad" type="date" placeholder="0">
+                                </article>
+                            </article>
+                        </div>
+                    
+                    <div class="form-group">
+                        <article class="form-option-number">
+                            <label>¿Cual es tu altura?</label>
+                            <article>
+                                <input name="altura" type="number" placeholder="180">
+                            </article>
+                        </article>
+                    </div>
+                
+                    <div id="ideal_weigth">
+                        <article>
+                            <h4>TEXTO RESULTANTE ACA</h4>
+                        </article>
+                    </div>
+
+                    <button>
+                        <div class="button-style-3">
+                            <div class="button-name">
+                                Calcular
+                            </div>
+                            <div class="button-icon">
+                                >>
+                            </div>
+                        </div>
+                    </button>
+                    <div  class="condicional-if">
+                    {%if peso_ideal%}
+                    <div>
+                        <h1>Tus peso ideal sería: <span>{{peso_ideal}}</span></h1>
+                    </div>
+                    {%endif%}
+                    {% if error_peso_ideal %}
+                        <div class="alert alert-error">
+                            <div class="icon__wrapper">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-triangle" viewBox="0 0 16 16">
+                                    <path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/>
+                                    <path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z"/>
+                                </svg>
+                            </div>
+                            <p>Tus datos ingresados son incorectos</p>
+                        </div>
+                    {% endif %}
+                    </div>
+                </form>
+            </div>
+                
+        </section>
+
+        <section class="second_section">
+
+            <article id="second_section_row_first">
+                <div class="item-cal-sec-title">
+                    <h5>Grafico de la semana</h5>
+                </div>
+                <div class="item-cal-sec-porc">
+                    <h5>General</h5>
+                </div>
+            </article>
+
+            <article class="second_section_row_second" id="second_section_row_second">
+                <div class="item-cal-sec-title">
+                    <h5>Calorias Quemadas</h5>
+                </div>
+                <div class="item-cal-sec-porc">
+                    <h4 id="calorias_quemadas_h4">5%</h4>
+                    <h4 id="calorias_quemadas1_h4">5%</h4>
+                </div>
+            </article>
+
+            <article class="second_section_row_third" id="second_section_row_third">
+                <div class="item-cal-sec-title">
+                    <h5>Indice de masa corporal</h5>
+                </div>
+                <div class="item-cal-sec-porc">
+                    <h4 id="imc_h4"></h4>
+                    <h4 id="imc1_h4"></h4>
+                </div>
+            </article>
+        </section>
+        <div class="canvas-container" id="canvas-container_one" style="display: none;"><canvas class="canvas" id="myChart1"></canvas></div>
+        <div class="canvas-container" id="canvas-container_two" style="display: none;"><canvas class="canvas" id="myChart2"></canvas></div>
+        <div class="canvas-container" id="canvas-container_three" style="display: none;"><canvas class="canvas" id="myChart3"></canvas></div>
+
+    </main>
+
+    <div id="loader">
+        <div class="loader-spinner"></div>
+    </div>
+
+    <script src="../static/js/modules/loader.js"></script>
+    <script src="../static/js/modules/menu.js"></script>
+    <script src="../static/js/displays.js"></script>
+    <script src="../static/js/textChange.js"></script>
+    <script src="../static/js/chartjs/chart.js"></script>
+    <script src="../static/js/calculator.js"></script>
+</body>
+</html>
