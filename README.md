@@ -12,6 +12,7 @@ En este perfil podrás encontrar algunos de nuestros proyectos destacados, así 
 ¡Gracias por visitarnos! 🙌💻👨‍💻👩‍💻🚀
 
 INTEGRANTES:
+
 ♦ Gabriel Hernán Osores
 
 ♦ Gonzalo Enzo Gramajo
